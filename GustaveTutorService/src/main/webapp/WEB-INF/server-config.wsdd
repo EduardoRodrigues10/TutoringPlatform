@@ -1,0 +1,94 @@
+<ns1:deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java" xmlns:ns1="http://xml.apache.org/axis/wsdd/">
+ <ns1:globalConfiguration>
+  <ns1:parameter name="sendMultiRefs" value="true"/>
+  <ns1:parameter name="disablePrettyXML" value="true"/>
+  <ns1:parameter name="adminPassword" value="admin"/>
+  <ns1:parameter name="attachments.Directory" value="/home/edouardo/Documents/eclipse-PRO-workspace/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/GustaveTutorService/WEB-INF/attachments"/>
+  <ns1:parameter name="dotNetSoapEncFix" value="true"/>
+  <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
+  <ns1:parameter name="sendXMLDeclaration" value="true"/>
+  <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
+  <ns1:requestFlow>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="session"/>
+   </ns1:handler>
+   <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
+    <ns1:parameter name="scope" value="request"/>
+    <ns1:parameter name="extension" value=".jwr"/>
+   </ns1:handler>
+  </ns1:requestFlow>
+ </ns1:globalConfiguration>
+ <ns1:handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper"/>
+ <ns1:handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler"/>
+ <ns1:handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder"/>
+ <ns1:service name="AdminService" provider="java:MSG">
+  <ns1:parameter name="allowedMethods" value="AdminService"/>
+  <ns1:parameter name="enableRemoteAdmin" value="false"/>
+  <ns1:parameter name="className" value="org.apache.axis.utils.Admin"/>
+  <ns1:namespace>http://xml.apache.org/axis/wsdd/</ns1:namespace>
+ </ns1:service>
+ <ns1:service name="Version" provider="java:RPC">
+  <ns1:parameter name="allowedMethods" value="getVersion"/>
+  <ns1:parameter name="className" value="org.apache.axis.Version"/>
+ </ns1:service>
+ <ns1:service name="Plateforme" provider="java:RPC" style="wrapped" use="literal">
+  <ns3:operation name="rechercherParTarif" qname="ns1:rechercherParTarif" returnQName="ns1:rechercherParTarifReturn" returnType="ns2:TuteurService" soapAction="" xmlns:ns1="http://serveur" xmlns:ns2="http://tuteurservice" xmlns:ns3="http://xml.apache.org/axis/wsdd/">
+   <ns3:parameter qname="ns1:tarifMax" type="xsd:double" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns3:operation>
+  <ns1:operation name="prendreRendezVous" qname="ns3:prendreRendezVous" returnQName="ns3:prendreRendezVousReturn" returnType="xsd:int" soapAction="" xmlns:ns3="http://serveur" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+   <ns1:parameter qname="ns3:name" type="xsd:string"/>
+   <ns1:parameter qname="ns3:tuteur" type="ns4:TuteurService" xmlns:ns4="http://tuteurservice"/>
+   <ns1:parameter qname="ns3:jour" type="xsd:int"/>
+   <ns1:parameter qname="ns3:heureDebut" type="xsd:double"/>
+   <ns1:parameter qname="ns3:heureFin" type="xsd:double"/>
+  </ns1:operation>
+  <ns1:operation name="rechercherParNom" qname="ns5:rechercherParNom" returnQName="ns5:rechercherParNomReturn" returnType="ns6:TuteurService" soapAction="" xmlns:ns5="http://serveur" xmlns:ns6="http://tuteurservice">
+   <ns1:parameter qname="ns5:nom" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="faireRendezVous" qname="ns7:faireRendezVous" soapAction="" xmlns:ns7="http://serveur">
+   <ns1:parameter qname="ns7:rdv" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="rechercherParDisponibilite" qname="ns8:rechercherParDisponibilite" returnQName="ns8:rechercherParDisponibiliteReturn" returnType="ns9:TuteurService" soapAction="" xmlns:ns8="http://serveur" xmlns:ns9="http://tuteurservice">
+   <ns1:parameter qname="ns8:jour" type="xsd:int" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns8:heureDebut" type="xsd:double" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+   <ns1:parameter qname="ns8:heureFin" type="xsd:double" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="rechercherParMatiere" qname="ns10:rechercherParMatiere" returnQName="ns10:rechercherParMatiereReturn" returnType="ns11:TuteurService" soapAction="" xmlns:ns10="http://serveur" xmlns:ns11="http://tuteurservice">
+   <ns1:parameter qname="ns10:matiere" type="xsd:string" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  </ns1:operation>
+  <ns1:operation name="rechercherToutLesTuteurs" qname="ns12:rechercherToutLesTuteurs" returnQName="ns12:rechercherToutLesTuteursReturn" returnType="ns13:TuteurService" soapAction="" xmlns:ns12="http://serveur" xmlns:ns13="http://tuteurservice"/>
+  <ns1:parameter name="allowedMethods" value="rechercherParNom rechercherParMatiere rechercherParTarif prendreRendezVous rechercherToutLesTuteurs faireRendezVous rechercherParDisponibilite"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
+  <ns1:parameter name="wsdlPortType" value="Plateforme"/>
+  <ns1:parameter name="className" value="serveur.Plateforme"/>
+  <ns1:parameter name="wsdlServicePort" value="Plateforme"/>
+  <ns1:parameter name="schemaQualified" value="http://tuteurservice,http://etudiantservice,http://rendezvousservice,http://serveur"/>
+  <ns1:parameter name="wsdlTargetNamespace" value="http://serveur"/>
+  <ns1:parameter name="wsdlServiceElement" value="PlateformeService"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns14:TuteurService" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:tuteurservice.TuteurService" xmlns:ns14="http://tuteurservice"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns15:RendezVousService" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:rendezvousservice.RendezVousService" xmlns:ns15="http://rendezvousservice"/>
+  <ns1:typeMapping deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="" qname="ns16:EtudiantService" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" type="java:etudiantservice.EtudiantService" xmlns:ns16="http://etudiantservice"/>
+  <ns1:arrayMapping innerType="xsd:double" languageSpecificType="java:double[]" qname="ns17:ArrayOf_xsd_double" xmlns:ns17="http://serveur" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:arrayMapping innerType="ns19:RendezVousService" languageSpecificType="java:rendezvousservice.RendezVousService[]" qname="ns18:ArrayOf_tns2_RendezVousService" xmlns:ns18="http://serveur" xmlns:ns19="http://rendezvousservice"/>
+  <ns1:arrayMapping innerType="xsd:int" languageSpecificType="java:int[]" qname="ns20:ArrayOf_xsd_int" xmlns:ns20="http://serveur" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+  <ns1:arrayMapping innerType="xsd:string" languageSpecificType="java:java.lang.String[]" qname="ns21:ArrayOf_xsd_string" xmlns:ns21="http://serveur" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
+ </ns1:service>
+ <ns1:transport name="http">
+  <ns1:requestFlow>
+   <ns1:handler type="URLMapper"/>
+   <ns1:handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler"/>
+  </ns1:requestFlow>
+  <ns1:parameter name="qs:list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs:wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+  <ns1:parameter name="qs.list" value="org.apache.axis.transport.http.QSListHandler"/>
+  <ns1:parameter name="qs.method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs:method" value="org.apache.axis.transport.http.QSMethodHandler"/>
+  <ns1:parameter name="qs.wsdl" value="org.apache.axis.transport.http.QSWSDLHandler"/>
+ </ns1:transport>
+ <ns1:transport name="local">
+  <ns1:responseFlow>
+   <ns1:handler type="LocalResponder"/>
+  </ns1:responseFlow>
+ </ns1:transport>
+</ns1:deployment>

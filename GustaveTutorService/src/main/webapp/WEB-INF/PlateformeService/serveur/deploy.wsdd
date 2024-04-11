@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from PlateformeService WSDL service -->
+
+  <service name="Plateforme" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://serveur"/>
+      <parameter name="wsdlServiceElement" value="PlateformeService"/>
+      <parameter name="schemaQualified" value="http://tuteurservice,http://etudiantservice,http://rendezvousservice,http://serveur"/>
+      <parameter name="wsdlServicePort" value="Plateforme"/>
+      <parameter name="className" value="serveur.Plateforme"/>
+      <parameter name="wsdlPortType" value="Plateforme"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://serveur" xmlns:retNS="http://serveur" xmlns:rtns="http://tuteurservice" name="rechercherParTarif" qname="operNS:rechercherParTarif" returnQName="retNS:rechercherParTarifReturn" returnType="rtns:TuteurService" soapAction="">
+        <parameter xmlns:pns="http://serveur" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:tarifMax" type="tns:double"/>
+      </operation>
+      <operation xmlns:operNS="http://serveur" xmlns:retNS="http://serveur" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="prendreRendezVous" qname="operNS:prendreRendezVous" returnQName="retNS:prendreRendezVousReturn" returnType="rtns:int" soapAction="">
+        <parameter xmlns:pns="http://serveur" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:name" type="tns:string"/>
+        <parameter xmlns:pns="http://serveur" xmlns:tns="http://tuteurservice" qname="pns:tuteur" type="tns:TuteurService"/>
+        <parameter xmlns:pns="http://serveur" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:jour" type="tns:int"/>
+        <parameter xmlns:pns="http://serveur" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:heureDebut" type="tns:double"/>
+        <parameter xmlns:pns="http://serveur" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:heureFin" type="tns:double"/>
+      </operation>
+      <operation xmlns:operNS="http://serveur" xmlns:retNS="http://serveur" xmlns:rtns="http://tuteurservice" name="rechercherParNom" qname="operNS:rechercherParNom" returnQName="retNS:rechercherParNomReturn" returnType="rtns:TuteurService" soapAction="">
+        <parameter xmlns:pns="http://serveur" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:nom" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://serveur" name="faireRendezVous" qname="operNS:faireRendezVous" soapAction="">
+        <parameter xmlns:pns="http://serveur" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:rdv" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://serveur" xmlns:retNS="http://serveur" xmlns:rtns="http://tuteurservice" name="rechercherParDisponibilite" qname="operNS:rechercherParDisponibilite" returnQName="retNS:rechercherParDisponibiliteReturn" returnType="rtns:TuteurService" soapAction="">
+        <parameter xmlns:pns="http://serveur" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:jour" type="tns:int"/>
+        <parameter xmlns:pns="http://serveur" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:heureDebut" type="tns:double"/>
+        <parameter xmlns:pns="http://serveur" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:heureFin" type="tns:double"/>
+      </operation>
+      <operation xmlns:operNS="http://serveur" xmlns:retNS="http://serveur" xmlns:rtns="http://tuteurservice" name="rechercherParMatiere" qname="operNS:rechercherParMatiere" returnQName="retNS:rechercherParMatiereReturn" returnType="rtns:TuteurService" soapAction="">
+        <parameter xmlns:pns="http://serveur" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:matiere" type="tns:string"/>
+      </operation>
+      <operation xmlns:operNS="http://serveur" xmlns:retNS="http://serveur" xmlns:rtns="http://tuteurservice" name="rechercherToutLesTuteurs" qname="operNS:rechercherToutLesTuteurs" returnQName="retNS:rechercherToutLesTuteursReturn" returnType="rtns:TuteurService" soapAction="">
+      </operation>
+      <parameter name="allowedMethods" value="rechercherParNom rechercherParMatiere rechercherParTarif prendreRendezVous rechercherToutLesTuteurs faireRendezVous rechercherParDisponibilite"/>
+
+      <arrayMapping xmlns:ns="http://serveur" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_double" type="java:double[]" innerType="cmp-ns:double" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://tuteurservice" qname="ns:TuteurService" type="java:tuteurservice.TuteurService" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://serveur" xmlns:cmp-ns="http://rendezvousservice" qname="ns:ArrayOf_tns2_RendezVousService" type="java:rendezvousservice.RendezVousService[]" innerType="cmp-ns:RendezVousService" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://rendezvousservice" qname="ns:RendezVousService" type="java:rendezvousservice.RendezVousService" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <typeMapping xmlns:ns="http://etudiantservice" qname="ns:EtudiantService" type="java:etudiantservice.EtudiantService" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://serveur" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_int" type="java:int[]" innerType="cmp-ns:int" encodingStyle=""/>
+      <arrayMapping xmlns:ns="http://serveur" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle=""/>
+  </service>
+</deployment>

@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://serveur" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://serveur" xmlns:intf="http://serveur" xmlns:tns1="http://tuteurservice" xmlns:tns2="http://rendezvousservice" xmlns:tns3="http://etudiantservice" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://serveur" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://rendezvousservice"/>
+   <import namespace="http://etudiantservice"/>
+   <import namespace="http://tuteurservice"/>
+   <element name="rechercherParTarif">
+    <complexType>
+     <sequence>
+      <element name="tarifMax" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="rechercherParTarifResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="rechercherParTarifReturn" type="tns1:TuteurService"/>
+     </sequence>
+    </complexType>
+   </element>
+   <complexType name="ArrayOf_tns2_RendezVousService">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="tns2:RendezVousService"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_xsd_double">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:double"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_xsd_int">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:int"/>
+    </sequence>
+   </complexType>
+   <complexType name="ArrayOf_xsd_string">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:string"/>
+    </sequence>
+   </complexType>
+   <element name="prendreRendezVous">
+    <complexType>
+     <sequence>
+      <element name="name" type="xsd:string"/>
+      <element name="tuteur" type="tns1:TuteurService"/>
+      <element name="jour" type="xsd:int"/>
+      <element name="heureDebut" type="xsd:double"/>
+      <element name="heureFin" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="prendreRendezVousResponse">
+    <complexType>
+     <sequence>
+      <element name="prendreRendezVousReturn" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="rechercherParNom">
+    <complexType>
+     <sequence>
+      <element name="nom" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="rechercherParNomResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="rechercherParNomReturn" type="tns1:TuteurService"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="faireRendezVous">
+    <complexType>
+     <sequence>
+      <element name="rdv" type="xsd:int"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="faireRendezVousResponse">
+    <complexType/>
+   </element>
+   <element name="rechercherParDisponibilite">
+    <complexType>
+     <sequence>
+      <element name="jour" type="xsd:int"/>
+      <element name="heureDebut" type="xsd:double"/>
+      <element name="heureFin" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="rechercherParDisponibiliteResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="rechercherParDisponibiliteReturn" type="tns1:TuteurService"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="rechercherParMatiere">
+    <complexType>
+     <sequence>
+      <element name="matiere" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="rechercherParMatiereResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="rechercherParMatiereReturn" type="tns1:TuteurService"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="rechercherToutLesTuteurs">
+    <complexType/>
+   </element>
+   <element name="rechercherToutLesTuteursResponse">
+    <complexType>
+     <sequence>
+      <element maxOccurs="unbounded" name="rechercherToutLesTuteursReturn" type="tns1:TuteurService"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://etudiantservice" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://serveur"/>
+   <import namespace="http://rendezvousservice"/>
+   <import namespace="http://tuteurservice"/>
+   <complexType name="EtudiantService">
+    <sequence>
+     <element name="RDV" nillable="true" type="impl:ArrayOf_tns2_RendezVousService"/>
+     <element name="isInterne" type="xsd:boolean"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://rendezvousservice" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://serveur"/>
+   <import namespace="http://etudiantservice"/>
+   <import namespace="http://tuteurservice"/>
+   <complexType name="RendezVousService">
+    <sequence>
+     <element name="etudiant" nillable="true" type="tns3:EtudiantService"/>
+     <element name="heureDebut" type="xsd:double"/>
+     <element name="heureFin" type="xsd:double"/>
+     <element name="jour" nillable="true" type="xsd:int"/>
+     <element name="tuteur" nillable="true" type="tns1:TuteurService"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema elementFormDefault="qualified" targetNamespace="http://tuteurservice" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://serveur"/>
+   <import namespace="http://rendezvousservice"/>
+   <import namespace="http://etudiantservice"/>
+   <complexType name="TuteurService">
+    <sequence>
+     <element name="RDV" nillable="true" type="impl:ArrayOf_tns2_RendezVousService"/>
+     <element name="calendrierHoraires" nillable="true" type="impl:ArrayOf_xsd_double"/>
+     <element name="calendrierJours" nillable="true" type="impl:ArrayOf_xsd_int"/>
+     <element name="domainesExpertise" nillable="true" type="impl:ArrayOf_xsd_string"/>
+     <element name="name" nillable="true" type="xsd:string"/>
+     <element name="tarifHoraire" type="xsd:double"/>
+    </sequence>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="rechercherParNomRequest">
+
+      <wsdl:part element="impl:rechercherParNom" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="rechercherToutLesTuteursResponse">
+
+      <wsdl:part element="impl:rechercherToutLesTuteursResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="prendreRendezVousRequest">
+
+      <wsdl:part element="impl:prendreRendezVous" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="rechercherParDisponibiliteResponse">
+
+      <wsdl:part element="impl:rechercherParDisponibiliteResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="prendreRendezVousResponse">
+
+      <wsdl:part element="impl:prendreRendezVousResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="rechercherParMatiereRequest">
+
+      <wsdl:part element="impl:rechercherParMatiere" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="rechercherParMatiereResponse">
+
+      <wsdl:part element="impl:rechercherParMatiereResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="rechercherParTarifRequest">
+
+      <wsdl:part element="impl:rechercherParTarif" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="rechercherParDisponibiliteRequest">
+
+      <wsdl:part element="impl:rechercherParDisponibilite" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="faireRendezVousResponse">
+
+      <wsdl:part element="impl:faireRendezVousResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="rechercherParTarifResponse">
+
+      <wsdl:part element="impl:rechercherParTarifResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="rechercherParNomResponse">
+
+      <wsdl:part element="impl:rechercherParNomResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="faireRendezVousRequest">
+
+      <wsdl:part element="impl:faireRendezVous" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="rechercherToutLesTuteursRequest">
+
+      <wsdl:part element="impl:rechercherToutLesTuteurs" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Plateforme">
+
+      <wsdl:operation name="rechercherParTarif">
+
+         <wsdl:input message="impl:rechercherParTarifRequest" name="rechercherParTarifRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:rechercherParTarifResponse" name="rechercherParTarifResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="prendreRendezVous">
+
+         <wsdl:input message="impl:prendreRendezVousRequest" name="prendreRendezVousRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:prendreRendezVousResponse" name="prendreRendezVousResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="rechercherParNom">
+
+         <wsdl:input message="impl:rechercherParNomRequest" name="rechercherParNomRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:rechercherParNomResponse" name="rechercherParNomResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="faireRendezVous">
+
+         <wsdl:input message="impl:faireRendezVousRequest" name="faireRendezVousRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:faireRendezVousResponse" name="faireRendezVousResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="rechercherParDisponibilite">
+
+         <wsdl:input message="impl:rechercherParDisponibiliteRequest" name="rechercherParDisponibiliteRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:rechercherParDisponibiliteResponse" name="rechercherParDisponibiliteResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="rechercherParMatiere">
+
+         <wsdl:input message="impl:rechercherParMatiereRequest" name="rechercherParMatiereRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:rechercherParMatiereResponse" name="rechercherParMatiereResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="rechercherToutLesTuteurs">
+
+         <wsdl:input message="impl:rechercherToutLesTuteursRequest" name="rechercherToutLesTuteursRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:rechercherToutLesTuteursResponse" name="rechercherToutLesTuteursResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="PlateformeSoapBinding" type="impl:Plateforme">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="rechercherParTarif">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="rechercherParTarifRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="rechercherParTarifResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="prendreRendezVous">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="prendreRendezVousRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="prendreRendezVousResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="rechercherParNom">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="rechercherParNomRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="rechercherParNomResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="faireRendezVous">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="faireRendezVousRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="faireRendezVousResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="rechercherParDisponibilite">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="rechercherParDisponibiliteRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="rechercherParDisponibiliteResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="rechercherParMatiere">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="rechercherParMatiereRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="rechercherParMatiereResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="rechercherToutLesTuteurs">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="rechercherToutLesTuteursRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="rechercherToutLesTuteursResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="PlateformeService">
+
+      <wsdl:port binding="impl:PlateformeSoapBinding" name="Plateforme">
+
+         <wsdlsoap:address location="http://localhost:8080/GustaveTutorService/services/Plateforme"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

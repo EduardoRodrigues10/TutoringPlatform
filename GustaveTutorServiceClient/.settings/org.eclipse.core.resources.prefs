@@ -1,0 +1,13 @@
+eclipse.preferences.version=1
+encoding//src/main/java/banque/Banque.java=UTF-8
+encoding//src/main/java/banque/BanqueService.java=UTF-8
+encoding//src/main/java/banque/BanqueServiceLocator.java=UTF-8
+encoding//src/main/java/banque/BanqueSoapBindingStub.java=UTF-8
+encoding//src/main/java/etudiantservice/EtudiantService.java=UTF-8
+encoding//src/main/java/rendezvousservice/RendezVousService.java=UTF-8
+encoding//src/main/java/serveur/Plateforme.java=UTF-8
+encoding//src/main/java/serveur/PlateformeService.java=UTF-8
+encoding//src/main/java/serveur/PlateformeServiceLocator.java=UTF-8
+encoding//src/main/java/serveur/PlateformeSoapBindingStub.java=UTF-8
+encoding//src/main/java/tuteurservice/TuteurService.java=UTF-8
+encoding/<project>=UTF-8

@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://banque" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://banque" xmlns:intf="http://banque" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://banque" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="ajouterFond">
+    <complexType>
+     <sequence>
+      <element name="name" type="xsd:string"/>
+      <element name="montant" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="ajouterFondResponse">
+    <complexType/>
+   </element>
+   <element name="getSolde">
+    <complexType>
+     <sequence>
+      <element name="name" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getSoldeResponse">
+    <complexType>
+     <sequence>
+      <element name="getSoldeReturn" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="retirerFond">
+    <complexType>
+     <sequence>
+      <element name="name" type="xsd:string"/>
+      <element name="montant" type="xsd:double"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="retirerFondResponse">
+    <complexType/>
+   </element>
+   <element name="getDevise">
+    <complexType>
+     <sequence>
+      <element name="name" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="getDeviseResponse">
+    <complexType>
+     <sequence>
+      <element name="getDeviseReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="ajouterCompte">
+    <complexType>
+     <sequence>
+      <element name="name" type="xsd:string"/>
+      <element name="devise" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="ajouterCompteResponse">
+    <complexType/>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="getSoldeRequest">
+
+      <wsdl:part element="impl:getSolde" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="ajouterFondRequest">
+
+      <wsdl:part element="impl:ajouterFond" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDeviseRequest">
+
+      <wsdl:part element="impl:getDevise" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="ajouterCompteRequest">
+
+      <wsdl:part element="impl:ajouterCompte" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getSoldeResponse">
+
+      <wsdl:part element="impl:getSoldeResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="retirerFondRequest">
+
+      <wsdl:part element="impl:retirerFond" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="retirerFondResponse">
+
+      <wsdl:part element="impl:retirerFondResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="getDeviseResponse">
+
+      <wsdl:part element="impl:getDeviseResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="ajouterCompteResponse">
+
+      <wsdl:part element="impl:ajouterCompteResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="ajouterFondResponse">
+
+      <wsdl:part element="impl:ajouterFondResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="Banque">
+
+      <wsdl:operation name="ajouterFond">
+
+         <wsdl:input message="impl:ajouterFondRequest" name="ajouterFondRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:ajouterFondResponse" name="ajouterFondResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSolde">
+
+         <wsdl:input message="impl:getSoldeRequest" name="getSoldeRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getSoldeResponse" name="getSoldeResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="retirerFond">
+
+         <wsdl:input message="impl:retirerFondRequest" name="retirerFondRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:retirerFondResponse" name="retirerFondResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDevise">
+
+         <wsdl:input message="impl:getDeviseRequest" name="getDeviseRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:getDeviseResponse" name="getDeviseResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="ajouterCompte">
+
+         <wsdl:input message="impl:ajouterCompteRequest" name="ajouterCompteRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:ajouterCompteResponse" name="ajouterCompteResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="BanqueSoapBinding" type="impl:Banque">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="ajouterFond">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="ajouterFondRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="ajouterFondResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getSolde">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getSoldeRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getSoldeResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="retirerFond">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="retirerFondRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="retirerFondResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="getDevise">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="getDeviseRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="getDeviseResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="ajouterCompte">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="ajouterCompteRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="ajouterCompteResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="BanqueService">
+
+      <wsdl:port binding="impl:BanqueSoapBinding" name="Banque">
+
+         <wsdlsoap:address location="http://localhost:8080/Banque/services/Banque"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
